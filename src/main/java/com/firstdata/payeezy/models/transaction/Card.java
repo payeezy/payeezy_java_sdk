@@ -19,12 +19,6 @@ public class Card implements Cloneable {
 	@JsonProperty("cardholder_name")
 	private String name;
 
-	@JsonProperty("first_name")
-	private String firstName;
-
-	@JsonProperty("last_name")
-	private String lastName;
-
 	@JsonProperty("card_number")
 	private String number;
 
@@ -74,14 +68,6 @@ public class Card implements Cloneable {
 	
 	public void setCvv(String cvv) {
 		this.cvv = cvv;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
 	}
 
 	@Override

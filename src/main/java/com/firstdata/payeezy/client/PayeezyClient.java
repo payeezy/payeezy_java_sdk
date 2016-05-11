@@ -112,10 +112,7 @@ public class PayeezyClient extends PayeezyAbstractClient {
         ResponseHandler<PayeezyResponse> responseHandler = new ResponseHandler<PayeezyResponse>() {
 
            public PayeezyResponse handleResponse(final HttpResponse response) throws IOException {
-                    int status = response.getStatusLine().getStatusCode();
-                    HttpEntity entity = response.getEntity();
-                    String jsonResponse = entity != null ? EntityUtils.toString(entity) : null;
-               return new PayeezyResponse(status, jsonResponse);
+               return getResponse(response);
             }
 
         };
@@ -134,17 +131,18 @@ public class PayeezyClient extends PayeezyAbstractClient {
         HttpGet httpGet = new HttpGet(buildURI);
         HttpClient httpClient = payeezyHttpClient.getHttpClient();
         ResponseHandler<PayeezyResponse> responseHandler = new ResponseHandler<PayeezyResponse>() {
-
                 public PayeezyResponse handleResponse(final HttpResponse response) throws IOException {
-                    int status = response.getStatusLine().getStatusCode();
-                    HttpEntity entity = response.getEntity();
-                    String jsonResponse = entity != null ? EntityUtils.toString(entity) : null;
-                    String tokenResponse = jsonResponse.substring(jsonResponse.indexOf(":{") + 1, jsonResponse.indexOf("})"));
-                    return new PayeezyResponse(status, tokenResponse);
-           }
-
+                    return getResponse(response);
+                }
             };
         return httpClient.execute(httpGet, responseHandler);
+    }
+
+    private PayeezyResponse getResponse(HttpResponse response) throws IOException{
+        int status = response.getStatusLine().getStatusCode();
+        HttpEntity entity = response.getEntity();
+        String responseBody = entity != null ? EntityUtils.toString(entity) : null;
+        return new PayeezyResponse(status, responseBody);
     }
 
     /**

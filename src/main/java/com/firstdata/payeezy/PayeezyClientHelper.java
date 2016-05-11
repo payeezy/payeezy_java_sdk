@@ -6,7 +6,6 @@ import com.firstdata.payeezy.api.RequestMethod;
 import com.firstdata.payeezy.client.PayeezyClient;
 import com.firstdata.payeezy.client.PayeezyConfiguration;
 import com.firstdata.payeezy.models.exception.ApplicationRuntimeException;
-import com.firstdata.payeezy.models.exception.ClientErrorRuntimeException;
 import com.firstdata.payeezy.models.transaction.PayeezyResponse;
 import com.firstdata.payeezy.models.transaction.TransactionRequest;
 
@@ -77,9 +76,7 @@ public class PayeezyClientHelper {
         String payload = jsonHelper.getJSONObject(transactionRequest);
         String URL = properties.getProperty("url");
         URL = URL+ APIResourceConstants.PRIMARY_TRANSACTIONS;
-        System.out.println("API doPrimaryTransaction payload =" + payload);
         PayeezyResponse payeezyResponse = payeezyClient.execute(URL, RequestMethod.POST, getRequestOptions(), payload );
-        System.out.println("API doPrimaryTransaction response = " + jsonHelper.getJSONObject(payeezyResponse));
         return payeezyResponse;
     }
 
@@ -91,9 +88,7 @@ public class PayeezyClientHelper {
         String URL = properties.getProperty("url");
         URL = URL+ APIResourceConstants.PRIMARY_TRANSACTIONS+ "/"+id;
         String payload = jsonHelper.getJSONObject(transactionRequest);
-        System.out.println("API doSecondaryTransaction payload =" + payload);
         PayeezyResponse payeezyResponse = payeezyClient.execute(URL, RequestMethod.POST, getRequestOptions(),payload );
-        System.out.println("API doSecondaryTransaction response = " + jsonHelper.getJSONObject(payeezyResponse));
         return payeezyResponse;
     }
 
@@ -118,7 +113,6 @@ public class PayeezyClientHelper {
             queryMap.put(APIResourceConstants.SecurityConstants.JS_SECURITY_KEY, jsSecurityKey);
         }
         PayeezyResponse payeezyResponse = payeezyClient.execute(URL, RequestMethod.GET, null, queryMap);
-        System.out.println("API goGetTokenCall response = " + jsonHelper.getJSONObject(payeezyResponse));
         return payeezyResponse;
     }
 
@@ -131,9 +125,7 @@ public class PayeezyClientHelper {
     public PayeezyResponse doExchangeRate(TransactionRequest transactionRequest) throws Exception {
         String URL = properties.getProperty("url")+ APIResourceConstants.EXCHANGE_RATE;
         String payload = jsonHelper.getJSONObject(transactionRequest);
-        System.out.println("API Exchange Rate payload =" + payload);
         PayeezyResponse payeezyResponse = payeezyClient.execute(URL, RequestMethod.POST, getRequestOptions(),payload );
-        System.out.println("API Exchange Rate response = " + jsonHelper.getJSONObject(payeezyResponse));
         return payeezyResponse;
     }
 
@@ -149,7 +141,6 @@ public class PayeezyClientHelper {
     public PayeezyResponse getEvents(String URL, Map<String, String> queryMap, PayeezyRequestOptions requestOptions) throws Exception {
         URL = URL+ APIResourceConstants.SECURE_TOKEN_URL;
         PayeezyResponse payeezyResponse = payeezyClient.execute(URL, RequestMethod.GET,requestOptions,queryMap);
-        System.out.println("API goGetTokenCall response = " + jsonHelper.getJSONObject(payeezyResponse));
         return payeezyResponse;
     }
 
