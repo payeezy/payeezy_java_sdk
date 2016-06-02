@@ -31,7 +31,7 @@ public abstract class PayeezyAbstractClient {
             returnMap.put(APIResourceConstants.SecurityConstants.TOKEN, requestOptions.getToken());
             returnMap.put(APIResourceConstants.SecurityConstants.APISECRET, requestOptions.getSecret());
             returnMap.put(APIResourceConstants.SecurityConstants.PAYLOAD, payLoad);
-           // returnMap.put(APIResourceConstants.SecurityConstants.AUTHORIZE, getMacValue(returnMap));
+            returnMap.put(APIResourceConstants.SecurityConstants.AUTHORIZE, getMacValue(returnMap));
             return returnMap;
         } catch (NoSuchAlgorithmException e) {
             MessageLogger.logMessage(e.getMessage());
