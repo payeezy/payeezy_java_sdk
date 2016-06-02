@@ -71,7 +71,7 @@ public abstract class PayeezyAbstractClient {
         byte[] macHash=mac.doFinal(bufferData.getBytes("UTF-8"));
         //MessageLogger.logMessage(Integer.toString(macHash.length));
         //MessageLogger.logMessage(String.format("MacHAsh:{}" , macHash));
-        String authorizeString = Base64.encodeBase64(toHex(macHash)).toString();
+        String authorizeString = new String(Base64.encodeBase64(toHex(macHash)));
         //   MessageLogger.logMessage(String.format("Authorize:{}" , authorizeString));
         return authorizeString;
     }
