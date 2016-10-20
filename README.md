@@ -5,18 +5,19 @@ Payeezy Java SDK is built to make developers life easy to integrate with the Pay
 
 To install it, run java -jar payeezy-java-client-1.0.jar and answer the questions to setup your credentials. Inputs apikey, token, secret, js_security_key (if you are transarmor enabled and plan on making token based transactions) and environment are mandatory. Choose sandbox if you are trying the documented api's. This will create a file .payeezy.properties in your home directory with the configuration settings for the SDK.  You can regenerate this file anytime by rerunning, or you may edit the settings manually.
 
-1) Add the following dependency for Maven
+1) Add the following dependency for Maven in your pom.xml
 
-Add the following dependency in your pom.xml
-	<dependency>
-		<groupId>com.firstdata.payeezy</groupId>
-		<artifactId>payeezy-java-client</artifactId>
-		<version>1.0</version>
-	</dependency>
+	```
+		<dependency>
+			<groupId>com.firstdata.payeezy</groupId>
+			<artifactId>payeezy-java-client</artifactId>
+			<version>1.0</version>
+		</dependency>
+	```
 
 2) Create your configuration file with one of the following
-	Run java -jar payeezy-java-client-1.0.jar
-	Add file .payeezy.properties to your home directory with the correct properties in it
+	* Run java -jar payeezy-java-client-1.0.jar.	
+	* Add file .payeezy.properties to your home directory with the correct properties in it.
 
 PayeezyClientHelper provides different methods to integrate with different transactions seemlessly. The SDK is supplied with objects to build your transaction requests easily and pass to the appropriate functions defined in PayeezyClientHelper.
 
@@ -26,7 +27,6 @@ Please refer to PayeezyClientHelper java documentation to understand the various
 
 Primary Transactions
 -------------------------
-
 1) Authorize
 2) Purchase
 3) Authorize_score
@@ -46,6 +46,13 @@ Credit Cards can be tokenized using our secure tokens api.
 *	Generate Token with ta_token - auth false - GET API
 *	Generate Token with ta_token - auth true - GET API
 *	Generate Token without  ta_token & auth -  - GET API with 0$ Auth
+
+# ACH Enrollment and Payments
+----------------------------
+1) Enroll in ConnectPay
+2) Validate
+3) UnEnroll
+4) Update Enrollment
 
 ## Contributing
 

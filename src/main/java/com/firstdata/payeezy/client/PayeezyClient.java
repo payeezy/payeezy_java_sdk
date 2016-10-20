@@ -9,8 +9,10 @@ import org.apache.http.HttpHeaders;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.ResponseHandler;
+import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
@@ -90,6 +92,8 @@ public class PayeezyClient extends PayeezyAbstractClient {
                 return executeGetRequest(URL,(Map<String,String>) payload);
             case POST:
                 return executePostRequest(URL,(String) payload,requestOptions);
+            case PUT:
+                return executePostRequest(URL,(String) payload,requestOptions);
             default:
                 throw new Exception("Unsupported Request Method");
         }
@@ -113,6 +117,30 @@ public class PayeezyClient extends PayeezyAbstractClient {
 
            public PayeezyResponse handleResponse(final HttpResponse response) throws IOException {
                return getResponse(response);
+            }
+
+        };
+        return httpClient.execute(httpPost, responseHandler);
+    }
+
+    /**
+     * Execute a PUT Request
+     * @param uri
+     * @param payload
+     * @param requestOptions
+     * @return
+     * @throws Exception
+     */
+    protected PayeezyResponse executePutRequest(String uri, String payload, PayeezyRequestOptions requestOptions) throws Exception{
+        HttpClient httpClient = payeezyHttpClient.getHttpClient();
+        HttpPut httpPost = createPutConnection(uri,payload,requestOptions);
+        StringEntity entity = new StringEntity(payload);
+        httpPost.setEntity(entity);
+        // Create a custom response handler
+        ResponseHandler<PayeezyResponse> responseHandler = new ResponseHandler<PayeezyResponse>() {
+
+            public PayeezyResponse handleResponse(final HttpResponse response) throws IOException {
+                return getResponse(response);
             }
 
         };
@@ -183,6 +211,20 @@ public class PayeezyClient extends PayeezyAbstractClient {
     }
 
     /**
+     * Create PUT Connection
+     * @param uri
+     * @param payload
+     * @param requestOptions
+     * @return
+     * @throws Exception
+     */
+    private HttpPut createPutConnection(String uri, String payload, PayeezyRequestOptions requestOptions) throws  Exception{
+        HttpPut put = new HttpPut(uri);
+        setHttpHeaders(put,payload, requestOptions );
+        return put;
+    }
+
+    /**
      * Set the HTTP Headers required for the request
      * @param httpPost
      * @param payload
@@ -190,7 +232,7 @@ public class PayeezyClient extends PayeezyAbstractClient {
      * @throws Exception
      */
 
-    private void setHttpHeaders(HttpPost httpPost, String payload, PayeezyRequestOptions requestOptions) throws  Exception{
+    private void setHttpHeaders(HttpEntityEnclosingRequestBase httpPost, String payload, PayeezyRequestOptions requestOptions) throws  Exception{
         Map<String, String> keyMap = getSecurityKeys( payload, requestOptions);
         Iterator<String> iter=keyMap.keySet().iterator();
         while(iter.hasNext()) {

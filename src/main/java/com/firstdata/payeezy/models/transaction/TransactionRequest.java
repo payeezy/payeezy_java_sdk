@@ -154,6 +154,9 @@ public class TransactionRequest {
 	@JsonProperty("user_name")
 	private String userName;
 
+	@JsonProperty("connect_pay")
+	private ConnectPay connectPay;
+
 	@JsonIgnore
 	private boolean internalTransaction;
 
@@ -541,5 +544,13 @@ public class TransactionRequest {
 
 	public void setBin(String bin) {
 		this.bin = bin;
+	}
+
+	public ConnectPay getConnectPay() {
+		return connectPay;
+	}
+
+	public void setConnectPay(ConnectPay connectPay) {
+		this.connectPay = connectPay;
 	}
 }

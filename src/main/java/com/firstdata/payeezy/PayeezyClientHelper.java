@@ -5,6 +5,8 @@ import com.firstdata.payeezy.api.PayeezyRequestOptions;
 import com.firstdata.payeezy.api.RequestMethod;
 import com.firstdata.payeezy.client.PayeezyClient;
 import com.firstdata.payeezy.client.PayeezyConfiguration;
+import com.firstdata.payeezy.models.enrollment.BAARequest;
+import com.firstdata.payeezy.models.enrollment.EnrollmentRequest;
 import com.firstdata.payeezy.models.exception.ApplicationRuntimeException;
 import com.firstdata.payeezy.models.transaction.PayeezyResponse;
 import com.firstdata.payeezy.models.transaction.TransactionRequest;
@@ -63,6 +65,7 @@ public class PayeezyClientHelper {
         if(properties ==null || properties.isEmpty()){
             throw new ApplicationRuntimeException("SDK Properties should be configured to use the Client. Please provide the required properties based on the type of transaction.");
         }
+        this.properties = properties;
         payeezyClient = new PayeezyClient(properties);
     }
 
@@ -144,10 +147,68 @@ public class PayeezyClientHelper {
         return payeezyResponse;
     }
 
+
     private  PayeezyRequestOptions getRequestOptions(){
         String apikey = properties.getProperty(APIResourceConstants.SecurityConstants.APIKEY);
         String secret = properties.getProperty(APIResourceConstants.SecurityConstants.APISECRET);
         String token = properties.getProperty(APIResourceConstants.SecurityConstants.TOKEN);
         return new PayeezyRequestOptions(apikey, token, secret);
     }
+
+    /**
+     * Enrollment call for Connect Pay
+     * @param EnrollmentRequest
+     * @return
+     * @throws Exception
+     */
+    public PayeezyResponse enrollInConnectPay(EnrollmentRequest enrollmentRequest) throws Exception {
+        String payload = jsonHelper.getJSONObject(enrollmentRequest);
+        String URL = properties.getProperty("url");
+        URL = URL+ APIResourceConstants.CONNECT_PAY_URL;
+        PayeezyResponse payeezyResponse = payeezyClient.execute(URL, RequestMethod.POST, getRequestOptions(), payload );
+        return payeezyResponse;
+    }
+
+    /**
+     * Enrollment call for Connect Pay
+     * @param BAARequest
+     * @return
+     * @throws Exception
+     */
+    public PayeezyResponse validateMicroDeposit(BAARequest microDeposit) throws Exception {
+        String payload = jsonHelper.getJSONObject(microDeposit);
+        String URL = properties.getProperty("url");
+        URL = URL+ APIResourceConstants.CONNECT_PAY_MICRO_DEPOSIT;
+        PayeezyResponse payeezyResponse = payeezyClient.execute(URL, RequestMethod.POST, getRequestOptions(), payload );
+        return payeezyResponse;
+    }
+
+    /**
+     * Update Connect Pay Enrollment info
+     * @param BAARequest
+     * @return
+     * @throws Exception
+     */
+    public PayeezyResponse updateConnectPayEnrollment(EnrollmentRequest enrollmentRequest) throws Exception {
+        String payload = jsonHelper.getJSONObject(enrollmentRequest);
+        String URL = properties.getProperty("url");
+        URL = URL+ APIResourceConstants.CONNECT_PAY_URL;
+        PayeezyResponse payeezyResponse = payeezyClient.execute(URL, RequestMethod.PUT, getRequestOptions(), payload );
+        return payeezyResponse;
+    }
+
+    /**
+     * Close Enrollment call for Connect Pay
+     * @param EnrollmentRequest
+     * @return
+     * @throws Exception
+     */
+    public PayeezyResponse closeConnectPayEnrollment(EnrollmentRequest enrollmentRequest) throws Exception {
+        String payload = jsonHelper.getJSONObject(enrollmentRequest);
+        String URL = properties.getProperty("url");
+        URL = URL+ APIResourceConstants.CONNECT_PAY_CLOSE;
+        PayeezyResponse payeezyResponse = payeezyClient.execute(URL, RequestMethod.POST, getRequestOptions(), payload );
+        return payeezyResponse;
+    }
+
 }
