@@ -49,7 +49,7 @@ Credit Cards can be tokenized using our secure tokens api.
 
 # ACH Enrollment and Payments
 ----------------------------
-1) Enroll in ConnectPay
+1) Enroll in ACH
 2) Validate
 3) UnEnroll
 4) Update Enrollment

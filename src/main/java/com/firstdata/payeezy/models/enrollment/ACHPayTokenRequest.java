@@ -5,7 +5,7 @@ import com.firstdata.payeezy.models.transaction.Phone;
 
 import java.util.ArrayList;
 
-public class ConnectPayTokenRequest {
+public class ACHPayTokenRequest {
 
 	@JsonProperty("subscriber_id")
 	String subscriberId;

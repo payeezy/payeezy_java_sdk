@@ -7,7 +7,7 @@ import com.firstdata.payeezy.models.transaction.PayeezyResponse;
 
 /** Example to illustrate an authorization using a credit card
  */
-public class ConnectPayEnrollmentSample {
+public class ACHEnrollmentSample {
 
     public static void main(String [] args){
         EnrollmentRequest enrollmentRequest = new EnrollmentRequest();
@@ -47,11 +47,11 @@ public class ConnectPayEnrollmentSample {
         PayeezyClientHelper clientHelper = new PayeezyClientHelper();
 
         try{
-            PayeezyResponse payeezyResponse = clientHelper.enrollInConnectPay(enrollmentRequest);
+            PayeezyResponse payeezyResponse = clientHelper.enrollInACH(enrollmentRequest);
             System.out.println("Status Code:"+payeezyResponse.getStatusCode());
             System.out.println("Response:"+payeezyResponse.getResponseBody());
             JSONHelper helper = new JSONHelper();
-            ConnectPayTokenResponse enrollmentResponse = helper.fromJson(payeezyResponse.getResponseBody(), ConnectPayTokenResponse.class);
+            ACHPayTokenResponse enrollmentResponse = helper.fromJson(payeezyResponse.getResponseBody(), ACHPayTokenResponse.class);
             // Validate Micro Deposits
             BAARequest baaRequest = new BAARequest();
             baaRequest.setEnrollmentId(enrollmentResponse.getEnrollmentId());
@@ -68,13 +68,13 @@ public class ConnectPayEnrollmentSample {
             address.setCity("Redwood City");
             address.setZip("07789");
 
-            PayeezyResponse updateResponse =  clientHelper.updateConnectPayEnrollment(enrollmentRequest);
+            PayeezyResponse updateResponse =  clientHelper.updateACHEnrollment(enrollmentRequest);
             System.out.println("Status Code:"+updateResponse.getStatusCode());
             System.out.println("Response:"+updateResponse.getResponseBody());
 
-            // Close ConnectPay Enrollment
+            // Close ACH Enrollment
             enrollmentRequest.setReason("Fraudulent Activity");
-            PayeezyResponse closeResponse = clientHelper.closeConnectPayEnrollment(enrollmentRequest);
+            PayeezyResponse closeResponse = clientHelper.closeACHEnrollment(enrollmentRequest);
             System.out.println("Status Code:"+closeResponse.getStatusCode());
             System.out.println("Response:"+closeResponse.getResponseBody());
 

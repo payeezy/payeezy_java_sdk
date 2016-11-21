@@ -47,7 +47,7 @@ public class PayeezyClientHelperTest {
         card.setType("visa");
         card.setCvv("123");
         card.setExpiryDt("1020");
-        card.setNumber("4012000033330026");
+        card.setToken("4012000033330026");
         transactionRequest.setCard(card);
         try {
             PayeezyResponse payeezyResponse = payeezyClientHelper.doPrimaryTransaction(transactionRequest);

@@ -2,7 +2,7 @@ package com.firstdata.payeezy.models.enrollment;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class EnrollmentRequest extends ConnectPayTokenRequest {
+public class EnrollmentRequest extends ACHPayTokenRequest {
 
 	@JsonProperty("applicaiton")
 	private EnrollmentApp enrollmentApplication;

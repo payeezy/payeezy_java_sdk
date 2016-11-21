@@ -156,57 +156,57 @@ public class PayeezyClientHelper {
     }
 
     /**
-     * Enrollment call for Connect Pay
-     * @param EnrollmentRequest
+     * Enrollment call for ACH Pay
+     * @param enrollmentRequest
      * @return
      * @throws Exception
      */
-    public PayeezyResponse enrollInConnectPay(EnrollmentRequest enrollmentRequest) throws Exception {
+    public PayeezyResponse enrollInACH(EnrollmentRequest enrollmentRequest) throws Exception {
         String payload = jsonHelper.getJSONObject(enrollmentRequest);
         String URL = properties.getProperty("url");
-        URL = URL+ APIResourceConstants.CONNECT_PAY_URL;
+        URL = URL+ APIResourceConstants.ACH_URL;
         PayeezyResponse payeezyResponse = payeezyClient.execute(URL, RequestMethod.POST, getRequestOptions(), payload );
         return payeezyResponse;
     }
 
     /**
-     * Enrollment call for Connect Pay
-     * @param BAARequest
+     * Validate ach micro deposit
+     * @param microDeposit
      * @return
      * @throws Exception
      */
     public PayeezyResponse validateMicroDeposit(BAARequest microDeposit) throws Exception {
         String payload = jsonHelper.getJSONObject(microDeposit);
         String URL = properties.getProperty("url");
-        URL = URL+ APIResourceConstants.CONNECT_PAY_MICRO_DEPOSIT;
+        URL = URL+ APIResourceConstants.ACH_MICRO_DEPOSIT;
         PayeezyResponse payeezyResponse = payeezyClient.execute(URL, RequestMethod.POST, getRequestOptions(), payload );
         return payeezyResponse;
     }
 
     /**
-     * Update Connect Pay Enrollment info
-     * @param BAARequest
+     * Update ACH Enrollment info
+     * @param enrollmentRequest
      * @return
      * @throws Exception
      */
-    public PayeezyResponse updateConnectPayEnrollment(EnrollmentRequest enrollmentRequest) throws Exception {
+    public PayeezyResponse updateACHEnrollment(EnrollmentRequest enrollmentRequest) throws Exception {
         String payload = jsonHelper.getJSONObject(enrollmentRequest);
         String URL = properties.getProperty("url");
-        URL = URL+ APIResourceConstants.CONNECT_PAY_URL;
+        URL = URL+ APIResourceConstants.ACH_URL;
         PayeezyResponse payeezyResponse = payeezyClient.execute(URL, RequestMethod.PUT, getRequestOptions(), payload );
         return payeezyResponse;
     }
 
     /**
-     * Close Enrollment call for Connect Pay
-     * @param EnrollmentRequest
+     * Close Enrollment call for ACH Pay
+     * @param enrollmentRequest
      * @return
      * @throws Exception
      */
-    public PayeezyResponse closeConnectPayEnrollment(EnrollmentRequest enrollmentRequest) throws Exception {
+    public PayeezyResponse closeACHEnrollment(EnrollmentRequest enrollmentRequest) throws Exception {
         String payload = jsonHelper.getJSONObject(enrollmentRequest);
         String URL = properties.getProperty("url");
-        URL = URL+ APIResourceConstants.CONNECT_PAY_CLOSE;
+        URL = URL+ APIResourceConstants.ACH_CLOSE;
         PayeezyResponse payeezyResponse = payeezyClient.execute(URL, RequestMethod.POST, getRequestOptions(), payload );
         return payeezyResponse;
     }

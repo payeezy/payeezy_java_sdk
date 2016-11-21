@@ -14,7 +14,7 @@ import java.util.List;
 @JsonAutoDetect(getterVisibility=Visibility.NONE,setterVisibility=Visibility.NONE,fieldVisibility=Visibility.ANY)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(Include.NON_EMPTY)
-public class ConnectPayTokenResponse {
+public class ACHPayTokenResponse {
 
 	// <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 	// <UcommEnrollmentResponse xmlns="http://cmi.connectpay.1dc.com/achReload">

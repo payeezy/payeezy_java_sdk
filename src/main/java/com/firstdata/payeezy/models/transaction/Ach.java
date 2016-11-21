@@ -11,15 +11,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonAutoDetect(getterVisibility= Visibility.NONE,setterVisibility= Visibility.NONE,fieldVisibility= Visibility.ANY)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(Include.NON_EMPTY)
-public class ConnectPay {
-    @JsonProperty("number")
-    private String number;
+public class Ach {
+    @JsonProperty("token")
+    private String token;
 
-    public String getNumber() {
-        return number;
+    public String getToken() {
+        return token;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setToken(String token) {
+        this.token = token;
     }
 }
