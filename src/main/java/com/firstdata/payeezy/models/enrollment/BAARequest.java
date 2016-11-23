@@ -10,8 +10,8 @@ public class BAARequest {
 	@JsonProperty("subscriber_id")
 	private String subscriberId;
 	
-	@JsonProperty("enrollment_id")
-	private String enrollmentId;
+	@JsonProperty("token")
+	private String token;
 	
 	@JsonProperty("authentication_answer")
 	private int authenticationAnswer;
@@ -24,11 +24,11 @@ public class BAARequest {
 	public void setEnrollmentApplication(EnrollmentApp enrollmentApplication) {
 		this.enrollmentApplication = enrollmentApplication;
 	}
-	public String getEnrollmentId() {
-		return enrollmentId;
+	public String getToken() {
+		return token;
 	}
-	public void setEnrollmentId(String enrollmentId) {
-		this.enrollmentId = enrollmentId;
+	public void setToken(String token) {
+		this.token = token;
 	}
 	public int getAuthenticationAnswer() {
 		return authenticationAnswer;

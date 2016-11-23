@@ -26,8 +26,8 @@ public class ACHPayTokenResponse {
 	// <UcommApplication><SubscriberId>36003347</SubscriberId></UcommApplication><UcommEnrollmentDataError/></UcommBaseResponse></UcommEnrollmentResponse>
 	
 	
-	@JsonProperty("enrollment_id")
-	private String enrollmentId;
+	@JsonProperty("token")
+	private String token;
 	
 	@JsonProperty("status_code")
 	private String statusCode;
@@ -60,11 +60,11 @@ public class ACHPayTokenResponse {
 	private List<Messages> errorMessages;
 	
 	
-	public String getEnrollmentId() {
-		return enrollmentId;
+	public String getToken() {
+		return token;
 	}
-	public void setEnrollmentId(String enrollmentId) {
-		this.enrollmentId = enrollmentId;
+	public void setToken(String token) {
+		this.token = token;
 	}
 	public String getStatusCode() {
 		return statusCode;

@@ -54,7 +54,7 @@ public class ACHEnrollmentSample {
             ACHPayTokenResponse enrollmentResponse = helper.fromJson(payeezyResponse.getResponseBody(), ACHPayTokenResponse.class);
             // Validate Micro Deposits
             BAARequest baaRequest = new BAARequest();
-            baaRequest.setEnrollmentId(enrollmentResponse.getEnrollmentId());
+            baaRequest.setToken(enrollmentResponse.getToken());
             baaRequest.setAuthenticationAnswer(11066);
             PayeezyResponse validationResponse = clientHelper.validateMicroDeposit(baaRequest);
             System.out.println("Status Code:"+validationResponse.getStatusCode());
@@ -62,7 +62,7 @@ public class ACHEnrollmentSample {
 
             // update enrollment data data
             // the below example updates the address associated with the user
-            enrollmentRequest.setEnrollmentId(enrollmentResponse.getEnrollmentId());
+            enrollmentRequest.setToken(enrollmentResponse.getToken());
             address.setAddressLine1("2000 Broadway Street");
             address.setState("CA");
             address.setCity("Redwood City");

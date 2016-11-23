@@ -26,8 +26,8 @@ public class EnrollmentRequest extends ACHPayTokenRequest {
 	// for physical cards
 	// may have to pass card id and pin
 	
-	@JsonProperty("enrollment_id")
-	private String enrollmentId;
+	@JsonProperty("token")
+	private String token;
 	
 	@JsonProperty("pin")
 	private String pin;
@@ -60,12 +60,12 @@ public class EnrollmentRequest extends ACHPayTokenRequest {
 		this.additionalPersonalInfo = additionalPersonalInfo;
 	}
 
-	public String getEnrollmentId() {
-		return enrollmentId;
+	public String getToken() {
+		return token;
 	}
 
-	public void setEnrollmentId(String enrollmentId) {
-		this.enrollmentId = enrollmentId;
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	public String getPin() {
